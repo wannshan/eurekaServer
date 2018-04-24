@@ -1,0 +1,36 @@
+eureka:
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 4000
+  instance:
+    preferIpAddress: true
+
+server:
+  port: 8760
+
+spring:
+  application:
+    name: EUREKA-SERVER-DOCKER
+---
+spring:
+  profiles: peer1
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.64.132:8762/eureka/
+  instance:
+    hostname: eurekaserver1
+    instance-id: eurekaserver1
+---
+spring:
+  profiles: peer2
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.64.132:8761/eureka/
+  instance:
+    hostname: eurekaserver2
+    instance-id: eurekaserver2
